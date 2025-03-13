@@ -8,7 +8,7 @@ Esta es una página web basada en React que cuenta con un sistema simple de logi
 
 ## Tabla de Contenidos
 
-1. [Instrucciones de Configuración ](#setup-instructions)
+1. [Instrucciones de Configuración ](#instrucciones-de-configuración)
 2. [Implementation Decisions](#implementation-decisions)
 3. [Component Structure](#component-structure)
 4. [Internationalization (i18n)](#internationalization-i18n)
