@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'
+import './i18n'
 import './App.css'
 import Login from './components/login/login'
 import Home from './components/home/home'

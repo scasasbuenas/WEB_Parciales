@@ -1,19 +1,14 @@
-import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+import LanguageSwitcher from "../languageSwitcher/LanguageSwitcher";
+import "../languageSwitcher/LanguageSwitcher.css";
 import "./home.css";
 
-function Home({ username }) {
+function Home() {
   const navigate = useNavigate();
 
-  // Example user data without fetching logic
-  const [userData] = useState({
-    name: username || "Usuario",
-    level: "Intermedio",
-    completedTriathlons: 5,
-    nextEvent: "Triatlón de Madrid",
-    nextEventDate: "15 de Agosto, 2025",
-    profileImage: "https://via.placeholder.com/150"
-  });
+  const { t } = useTranslation();
+
 
   return (
     <div className="home-container">
@@ -21,16 +16,20 @@ function Home({ username }) {
       <div className="icon-section">
         <div className="icon-item" onClick={() => navigate("/menu")}>
           <img src="https://dummyimage.com/600x400/000/fff" alt="Menu" />
-          <h3 style={{ color: "white" }}>Menu</h3>
+          <h3 style={{ color: "white" }}>{t("home.menu")}</h3>
         </div>
         <div className="icon-item" onClick={() => navigate("/stores")}>
           <img src="https://dummyimage.com/600x400/000/fff" alt="Stores" />
-          <h3 style={{ color: "white" }}>Stores</h3>
+          <h3 style={{ color: "white" }}>{t("home.stores")}</h3>
         </div>
         <div className="icon-item" onClick={() => navigate("/cart")}>
           <img src="https://dummyimage.com/600x400/000/fff" alt="Cart" />
-          <h3 style={{ color: "white" }}>Cart</h3>
+          <h3 style={{ color: "white" }}>{t("home.cart")} </h3>
         </div>
+      </div>
+
+      <div className="language-switcher-bottom-right">
+        <LanguageSwitcher />
       </div>
     </div>
   );
