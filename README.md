@@ -41,7 +41,7 @@ Esta es una página web basada en React que cuenta con un sistema simple de logi
    npm run dev
    ```
 
-## Implementation Decisions
+## Decisiones de Implementación
 
 ### Authentication Flow
 
