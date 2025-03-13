@@ -11,13 +11,13 @@ function Login({ onLoginSuccess }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     
-    // Here you would typically validate credentials with your backend
-    // For now, let's simulate a successful login
-    
-    // Call the onLoginSuccess callback with the email
+    if (password.length < 5 || password.length > 8) {
+      alert('La contraseña debe tener entre 5 y 8 caracteres');
+      return;
+    }
+
     onLoginSuccess(email);
-    
-    // Navigate to the home page
+
     navigate('/home');
   };
 
