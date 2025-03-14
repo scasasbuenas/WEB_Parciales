@@ -10,10 +10,10 @@ Esta es una página web basada en React que cuenta con un sistema simple de logi
 
 1. [Instrucciones de Configuración ](#instrucciones-de-configuración)
 2. [Decisiones de Implementación](#decisiones-de-implementación)
-3. [Component Structure](#component-structure)
-4. [Internationalization (i18n)](#internationalization-i18n)
-5. [Development Process](#development-process)
-6. [Usage Instructions](#usage-instructions)
+3. [Estructura de los Componentes](#estructura-de-los-componentes)
+4. [Internacionalización (i18n)](#internacionalización-i18n)
+5. [Proceso de Desarrollo](#proceso-de-desarrollo)
+6. [Instrucciones de Uso](#instrucciones-de-uso)
 
 ## Instrucciones de Configuración
 
