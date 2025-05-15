@@ -1,6 +1,6 @@
-import { ProfesorEntity } from 'src/profesor/profesor.entity/profesor.entity';
-import { ProyectoEntity } from 'src/proyecto/proyecto.entity/proyecto.entity';
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
+import { ProfesorEntity } from '../../profesor/profesor.entity/profesor.entity';
+import { ProyectoEntity } from '../../proyecto/proyecto.entity/proyecto.entity';
+import { Entity, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
 
 @Entity()
 export class EvaluacionEntity {

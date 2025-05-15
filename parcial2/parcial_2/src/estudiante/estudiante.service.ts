@@ -1,7 +1,8 @@
-import { Injectable, BadRequestException, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { EstudianteEntity } from './estudiante.entity/estudiante.entity';
+import { BussinesError, BussinesLogicException } from '../shared/errors/bussines-errors';
+import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class EstudianteService {
@@ -10,11 +11,10 @@ export class EstudianteService {
         private readonly estudianteRepository: Repository<EstudianteEntity>,
     ) {}
 
-    async crearEstudiante(data: Partial<EstudianteEntity>): Promise<EstudianteEntity> {
-        if (data.promedio <= 3.2 || data.semestre < 4) {
-            throw new BadRequestException('El promedio debe ser mayor a 3.2 y el semestre mayor o igual a 4');
+    async crearEstudiante(estudiante: EstudianteEntity): Promise<EstudianteEntity> {
+        if (estudiante.promedio <= 3.2 || estudiante.semestre < 4) {
+            throw new BussinesLogicException('El promedio debe ser mayor a 3.2 y el semestre mayor o igual a 4', BussinesError.PRECONDITION_FAILED);
         }
-        const estudiante = this.estudianteRepository.create(data);
         return this.estudianteRepository.save(estudiante);
     }
 
@@ -24,11 +24,11 @@ export class EstudianteService {
             relations: ['proyectos'],
         });
         if (!estudiante) {
-            throw new NotFoundException('Estudiante no encontrado');
+            throw new BussinesLogicException('Estudiante no encontrado', BussinesError.NOT_FOUND);
         }
         const tieneProyectosActivos = estudiante.proyectos?.some(p => p.estado !== 0);
         if (tieneProyectosActivos) {
-            throw new BadRequestException('No se puede eliminar un estudiante con proyectos activos');
+            throw new BussinesLogicException('No se puede eliminar un estudiante con proyectos activos', BussinesError.PRECONDITION_FAILED);
         }
         await this.estudianteRepository.delete(id);
     }

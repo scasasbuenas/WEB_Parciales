@@ -1,4 +1,4 @@
-import { ProyectoEntity } from "src/proyecto/proyecto.entity/proyecto.entity";
+import { ProyectoEntity } from "../../proyecto/proyecto.entity/proyecto.entity";
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
 
 @Entity()
@@ -15,7 +15,7 @@ export class EstudianteEntity {
     @Column({type: 'int'})
     semestre: number;
 
-    @Column({type: 'varchar'})
+    @Column()
     programa: string;
     
     @Column({type: 'int'})

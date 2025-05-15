@@ -1,7 +1,8 @@
-import { Injectable, BadRequestException, NotFoundException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { ProyectoEntity } from './proyecto.entity/proyecto.entity';
 import { Repository } from 'typeorm';
+import { BussinesLogicException, BussinesError } from 'src/shared/errors/bussines-errors';
 
 @Injectable()
 export class ProyectoService {
@@ -12,10 +13,10 @@ export class ProyectoService {
 
     async crearProyecto(proyecto: ProyectoEntity): Promise<ProyectoEntity> {
         if (proyecto.presupuesto <= 0) {
-            throw new BadRequestException('El presupuesto debe ser mayor a 0');
+            throw new BussinesLogicException('El presupuesto debe ser mayor a 0', BussinesError.PRECONDITION_FAILED);
         }
         if (!proyecto.titulo || proyecto.titulo.length <= 15) {
-            throw new BadRequestException('El título debe tener más de 15 caracteres');
+            throw new BussinesLogicException('El título debe tener más de 15 caracteres', BussinesError.PRECONDITION_FAILED);
         }
         return this.proyectoRepository.save(proyecto);
     }
@@ -23,10 +24,10 @@ export class ProyectoService {
     async avanzarProyecto(id: number): Promise<ProyectoEntity> {
         const proyecto = await this.proyectoRepository.findOne({ where: { id } });
         if (!proyecto) {
-            throw new NotFoundException('Proyecto no encontrado');
+            throw new BussinesLogicException('Proyecto no encontrado', BussinesError.NOT_FOUND);
         }
         if (proyecto.estado >= 4) {
-            throw new BadRequestException('El proyecto ya está en su estado máximo');
+            throw new BussinesLogicException('El proyecto ya está en su estado máximo', BussinesError.PRECONDITION_FAILED);
         }
         proyecto.estado += 1;
         return this.proyectoRepository.save(proyecto);
@@ -38,7 +39,7 @@ export class ProyectoService {
             relations: ['lider'],
         });
         if (!proyecto) {
-            throw new NotFoundException('Proyecto no encontrado');
+            throw new BussinesLogicException('Proyecto no encontrado', BussinesError.NOT_FOUND);
         }
         return proyecto.lider ? [proyecto.lider] : [];
     }
