@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { ProyectoEntity } from './proyecto.entity/proyecto.entity';
 import { Repository } from 'typeorm';
-import { BussinesLogicException, BussinesError } from 'src/shared/errors/bussines-errors';
+import { BussinesLogicException, BussinesError } from '../shared/errors/bussines-errors';
 
 @Injectable()
 export class ProyectoService {

@@ -1,0 +1,189 @@
+{
+	"info": {
+		"_postman_id": "f6ad4e57-b5ae-4c09-a6dc-048739a2b907",
+		"name": "Estudiante",
+		"description": "Documentación para los enpoints del API de estudiante.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "32500248"
+	},
+	"item": [
+		{
+			"name": "Añadir un estudiante",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = pm.response.json()",
+							"pm.globals.set(\"student_id\", data.id);",
+							"",
+							"pm.test(\"Status code is 201\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"cedula\": 1234567890,\n    \"nombre\": \"Juan Perez\",\n    \"semestre\": 5,\n    \"programa\": \"Ingenieria de Sistemas y Computacion\",\n    \"promedio\": 3.8\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/estudiante",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"estudiante"
+					]
+				},
+				"description": "Esta petición crea un nuevo estudiante. El API retorna el recurso creado con un ID asignado. Se escogió esta petición porque ilustra la correcta creación de un estudiante."
+			},
+			"response": [
+				{
+					"name": "Add a student",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"cedula\": 1234567890,\n    \"nombre\": \"Juan Perez\",\n    \"semestre\": 5,\n    \"programa\": \"Ingenieria de Sistemas y Computacion\",\n    \"promedio\": 3.8\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/estudiantes",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"estudiantes"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [],
+					"cookie": [],
+					"body": "{\n    \"id\": 1,\n    \"cedula\": 1234567890,\n    \"nombre\": \"Juan Perez\",\n    \"semestre\": 5,\n    \"programa\": \"Ingenieria de Sistemas y Computacion\",\n    \"promedio\": 3.8,\n    \"proyectos\": []\n}"
+				}
+			]
+		},
+		{
+			"name": "Borrar un estudiante",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 204\", function () {",
+							"    pm.response.to.have.status(204);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/estudiante/{{student_id}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"estudiante",
+						"{{student_id}}"
+					]
+				},
+				"description": "Esta petición borra un estudiante. Se escogió porque ilustra la forma en la que se elimina un registro."
+			},
+			"response": [
+				{
+					"name": "Delete a student",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/v1/estudiantes/{{student_id}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"estudiantes",
+								"{{student_id}}"
+							]
+						}
+					},
+					"status": "No Content",
+					"code": 204,
+					"_postman_previewlanguage": "Text",
+					"header": [],
+					"cookie": [],
+					"body": ""
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:3000/api/v1",
+			"type": "string"
+		}
+	]
+}

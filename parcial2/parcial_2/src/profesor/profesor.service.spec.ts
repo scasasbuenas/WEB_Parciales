@@ -22,4 +22,35 @@ describe('ProfesorService', () => {
   it('should be defined', () => {
     expect(service).toBeDefined();
   });
+
+  // Caso positivo
+  it('should create a valid profesor (extension de 5 digitos)', async () => {
+    const profesor: ProfesorEntity = {
+      id: 1,
+      cedula: 12345,
+      nombre: 'Camilo el Nenas',
+      departamento: 'Ingenieria de Sistemas y Computacion',
+      extension: 23456,
+      esParEvaluador: false,
+      evaluaciones: [],
+      mentorias: [],
+    };
+    const result = await service.crearProfesor(profesor);
+    expect(result).toMatchObject({extension: 23456});
+  });
+
+  // Caso negativo
+  it('should throw if extension is not 5 digits', async () => {
+    const profesor: ProfesorEntity = {
+      id: 1,
+      cedula: 12345,
+      nombre: 'Camilo el Nenas',
+      departamento: 'Ingenieria de Sistemas y Computacion',
+      extension: 2345,
+      esParEvaluador: false,
+      evaluaciones: [],
+      mentorias: [],
+    };
+    await expect(service.crearProfesor(profesor)).rejects.toHaveProperty('message', 'La extensión debe tener 5 dígitos');
+  });
 });

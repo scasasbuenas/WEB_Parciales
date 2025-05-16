@@ -18,7 +18,7 @@ export class EstudianteEntity {
     @Column()
     programa: string;
     
-    @Column({type: 'int'})
+    @Column({type: 'float'})
     promedio: number;
 
     @OneToMany(() => ProyectoEntity, proyecto => proyecto.lider)

@@ -1,0 +1,118 @@
+{
+	"info": {
+		"_postman_id": "819a2477-b585-472b-90d0-87644733b81a",
+		"name": "Profesor",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "32500248"
+	},
+	"item": [
+		{
+			"name": "Crear profesor válido",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"cedula\": 12345,\n    \"nombre\": \"Camilo el Nenas\",\n    \"departamento\": \"Ingeniería de Sistemas\",\n    \"extension\": 12345,\n    \"esParEvaluador\": false\n}"
+				},
+				"url": {
+					"raw": "{{baseUrl}}/profesor",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"profesor"
+					]
+				},
+				"description": "Esta petición crea un nuevo profesor. El API retorna el recurso creado con un ID asignado."
+			},
+			"response": []
+		},
+		{
+			"name": "Crear profesor con extensión inválida",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"cedula\": 67890,\n    \"nombre\": \"María García\",\n    \"departamento\": \"Ingeniería de Sistemas\",\n    \"extension\": 1234,\n    \"esParEvaluador\": true\n}"
+				},
+				"url": {
+					"raw": "{{baseUrl}}/profesor",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"profesor"
+					]
+				},
+				"description": "Esta petición intenta crear un nuevo porfesor utilizando una extensión inválida, con esto, probamos que no es posible y se retorna el código 412 con el mensage \"La extensión debe tener 5 dígitos\"."
+			},
+			"response": []
+		},
+		{
+			"name": "Asignar un profesor como evaluador",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "{{baseUrl}}/profesor/{{profesorId}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"profesor",
+						"{{profesorId}}"
+					]
+				},
+				"description": "Esta petición cambia el valor booleano del campo esParEvaluador de false a true."
+			},
+			"response": []
+		},
+		{
+			"name": "Asignar un profesor no existente como evaluador",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "{{baseUrl}}/profesor/999",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"profesor",
+						"999"
+					]
+				},
+				"description": "Esta petición intenta cambiar el el valor booleano del campo esParEvaluador y falla en el intento, respondiendo con el código 404 y el mensaje \"Profesor no encontrado\"."
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:3000/api/v1"
+		}
+	]
+}

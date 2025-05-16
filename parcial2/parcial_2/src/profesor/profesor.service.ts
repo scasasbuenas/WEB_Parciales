@@ -11,7 +11,7 @@ export class ProfesorService {
         private readonly profesorRepository: Repository<ProfesorEntity>,
     ) {}
 
-    async crarProfesor(profesor: ProfesorEntity): Promise<ProfesorEntity> {
+    async crearProfesor(profesor: ProfesorEntity): Promise<ProfesorEntity> {
         const extensionStr = profesor.extension.toString();
         if (extensionStr.length !== 5) {
             throw new BussinesLogicException('La extensión debe tener 5 dígitos', BussinesError.PRECONDITION_FAILED);

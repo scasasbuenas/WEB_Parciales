@@ -17,7 +17,7 @@ export class ProyectoEntity {
   @Column({ type: 'int' })
   presupuesto: number;
 
-  @Column({ type: 'int' })
+  @Column({ type: 'float' })
   notaFinal: number;
 
   @Column({ type: 'int' })

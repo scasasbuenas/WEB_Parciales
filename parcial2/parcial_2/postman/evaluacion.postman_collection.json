@@ -1,0 +1,172 @@
+{
+	"info": {
+		"_postman_id": "34bced2a-7ca4-4023-a266-54127bbdb051",
+		"name": "Evaluacion",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "32500248"
+	},
+	"item": [
+		{
+			"name": "Setup - Crear Profesor que es mentor",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"cedula\": 67890,\n    \"nombre\": \"Profesor Mentor\",\n    \"departamento\": \"Ingenieria de Sistemas\",\n    \"extension\": 54321,\n    \"esParEvaluador\": false\n}"
+				},
+				"url": {
+					"raw": "{{baseUrl}}/profesor",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"profesor"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Setup - Crear Profesor que es Evaluador",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"cedula\": 12345,\n    \"nombre\": \"Profesor Evaluador\",\n    \"departamento\": \"Ingenieria de Sistemas\",\n    \"extension\": 12345,\n    \"esParEvaluador\": true\n}"
+				},
+				"url": {
+					"raw": "{{baseUrl}}/profesor",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"profesor"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Setup - Crear Estudiante",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"cedula\": 1234567890,\n    \"nombre\": \"Santiago Casasbuenas\",\n    \"semestre\": 5,\n    \"programa\": \"Ingenieria de Sistemas y Computacion\",\n    \"promedio\": 3.8\n}"
+				},
+				"url": {
+					"raw": "{{baseUrl}}/estudiante",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"estudiante"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Setup - Create Proyecto",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"titulo\": \"Proyecto de Investigación en Inteligencia Artificial\",\n    \"area\": \"Inteligencia Artificial\",\n    \"presupuesto\": 1000000,\n    \"notaFinal\": 4.5,\n    \"estado\": 1,\n    \"fechaInicio\": \"2024-05-15\",\n    \"fechaFin\": \"2024-12-15\",\n    \"lider\": {\n        \"id\": {{studentId}}\n    },\n    \"mentor\": {\n        \"id\": {{mentorId}}\n    }\n}"
+				},
+				"url": {
+					"raw": "{{baseUrl}}/proyecto",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"proyecto"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crear evaluación válida",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"profesor\": {\n        \"id\": {{evaluatorId}}\n    },\n    \"proyecto\": {\n        \"id\": {{projectId}}\n    }\n}"
+				},
+				"url": {
+					"raw": "{{baseUrl}}/evaluacion",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"evaluacion"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crear evaluación con nota inválida",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"profesor\": {\n        \"id\": {{evaluatorId}}\n    },\n    \"proyecto\": {\n        \"id\": {{projectId}},\n        \"notaFinal\": 6.0\n    }\n}"
+				},
+				"url": {
+					"raw": "{{baseUrl}}/evaluacion",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"evaluacion"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:3000/api/v1"
+		}
+	]
+}

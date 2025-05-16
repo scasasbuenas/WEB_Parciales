@@ -1,0 +1,114 @@
+{
+	"info": {
+		"_postman_id": "9105f22d-f607-4bd5-801a-10f1930e8abe",
+		"name": "Proyecto",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "32500248"
+	},
+	"item": [
+		{
+			"name": "Crear proyecto válido",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"titulo\": \"Desarrollo de Aplicación Web\",\n    \"area\": \"Desarrollo Web\",\n    \"presupuesto\": 5000000,\n    \"notaFinal\": 4.5,\n    \"estado\": 1,\n    \"fechaInicio\": \"2024-03-15\",\n    \"fechaFin\": \"2024-12-15\",\n    \"lider\": {\n        \"id\": {{estudianteId}}\n    },\n    \"mentor\": {\n        \"id\": {{profesorId}}\n    }\n}"
+				},
+				"url": {
+					"raw": "{{baseUrl}}/proyecto",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"proyecto"
+					]
+				},
+				"description": "Esta petición crea un proyecto con todos los datos correspondientes. Se escogió esta petición porque ilustra la creación correcta de un proyecto."
+			},
+			"response": []
+		},
+		{
+			"name": "Crear proyecto con título inválido",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"titulo\": \"Proyecto\",\n    \"area\": \"Investigación\",\n    \"presupuesto\": 3000000,\n    \"notaFinal\": 4.0,\n    \"estado\": 1,\n    \"fechaInicio\": \"2024-12-15\",\n    \"fechaFin\": \"2024-03-15\",\n    \"lider\": {\n        \"id\": {{estudianteId}}\n    },\n    \"mentor\": {\n        \"id\": {{profesorId}}\n    }\n}"
+				},
+				"url": {
+					"raw": "{{baseUrl}}/proyecto",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"proyecto"
+					]
+				},
+				"description": "Esta petición intenta crear un proyecto que tiene un título con menos de 15 caracteres, lo que invoca el código 412 y retorna el mensaje \"El título debe tener más de 15 caracteres\". Se decidió probar este caso porque nos demuestra la validez y el funcionamiento de una petición que no logra pasar debido a un error que describimos previamente."
+			},
+			"response": []
+		},
+		{
+			"name": "Avanzar el estado del proyecto",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "{{baseUrl}}/proyecto/{{proyectoId}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"proyecto",
+						"{{proyectoId}}"
+					]
+				},
+				"description": "Esta petición ilustra el comportamiento del campo \"estado\" de un proyecto. Es este caso, la petición aumenta el estado. Lo interesante de esta petición y la razón por la que decidimos escogerla, es debido a que si se mandan más de 4 peticiones, se sobrepasa el estado máximo del proyecto, cuando el estado llega a 4 y se intenta hacer otra petición, se retorna el código de error 412 y el mensaje \"El proyecto ya está en su estado máximo\"."
+			},
+			"response": []
+		},
+		{
+			"name": "Get estudiantes de un proyecto (lider pq camilo estaba muy dormido)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/proyecto/{{proyectoId}}/estudiantes",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"proyecto",
+						"{{proyectoId}}",
+						"estudiantes"
+					]
+				},
+				"description": "Esta petición trae el estudiante relacionado con un proyecto a partir de su id. Se escogió hacer esta petición pq ilustra una de las únicas relaciones que estamos mostrando."
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:3000/api/v1"
+		}
+	]
+}
