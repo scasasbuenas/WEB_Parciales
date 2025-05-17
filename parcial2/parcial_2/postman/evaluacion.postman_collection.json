@@ -2,6 +2,7 @@
 	"info": {
 		"_postman_id": "34bced2a-7ca4-4023-a266-54127bbdb051",
 		"name": "Evaluacion",
+		"description": "Documentación para los enpoints del API de evaluación.",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "32500248"
 	},
@@ -28,7 +29,8 @@
 					"path": [
 						"profesor"
 					]
-				}
+				},
+				"description": "Esta petición tiene como propósito crear un profesor que a su vez sea mentor. Se implementa porque contribuye a la creación de una evaluación válida."
 			},
 			"response": []
 		},
@@ -54,7 +56,8 @@
 					"path": [
 						"profesor"
 					]
-				}
+				},
+				"description": "Esta petición tiene como propósito creear un profesor que a su vez sea evaluador. Se implementa porque contribuye a la creación de una evaluación válida."
 			},
 			"response": []
 		},
@@ -80,7 +83,8 @@
 					"path": [
 						"estudiante"
 					]
-				}
+				},
+				"description": "Esta petición tiene como propósito crear un estudiante. Se implementa porque contribuye a la creación de una evaluación válida."
 			},
 			"response": []
 		},
@@ -106,7 +110,8 @@
 					"path": [
 						"proyecto"
 					]
-				}
+				},
+				"description": "Esta petición tiene como propósito crear un proyecto. Se implementa porque contribuye a la creación de una evaluación válida."
 			},
 			"response": []
 		},
@@ -132,7 +137,8 @@
 					"path": [
 						"evaluacion"
 					]
-				}
+				},
+				"description": "Esta petición tiene como propósito crear una evaluación válida. Se escogió esta petición porque comprueba que a partir de parámetros de entrada válidos es posible crear una evlauación que asu vez tmb es válida."
 			},
 			"response": []
 		},
@@ -158,7 +164,8 @@
 					"path": [
 						"evaluacion"
 					]
-				}
+				},
+				"description": "Esta petición tiene como propósito mostrar que si están funcionando los errores descritos. es decir, que si se intenta crear una evaluación con una nota mayor a 5, esto debería generar un código de error acompañado de un mensaje."
 			},
 			"response": []
 		}

@@ -2,6 +2,7 @@
 	"info": {
 		"_postman_id": "9105f22d-f607-4bd5-801a-10f1930e8abe",
 		"name": "Proyecto",
+		"description": "Documentación para los enpoints del API de proyecto.",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "32500248"
 	},
